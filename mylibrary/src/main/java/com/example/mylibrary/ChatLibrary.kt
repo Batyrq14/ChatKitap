@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.example.mylibrary.ChatActivity
 
-class ChatLibrary private constructor() {
+public class ChatLibrary private constructor() {
 
     companion object {
         /**
