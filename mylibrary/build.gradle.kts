@@ -51,25 +51,26 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 }
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.github.Batyrq14"
+            artifactId = "mylibrary"
+            version = "1.0.1"
+            afterEvaluate {
                 from(components["release"])
-                groupId = "com.github.Batyrq14"
-                artifactId = "mylibrary"
-                version = "1.0.0"
-        }
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/Batyrq14/ChatKitap")
-                credentials {
-                    username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_USERNAME")
-                    password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
-                }
             }
         }
     }
-}
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Batyrq14/ChatKitap")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
